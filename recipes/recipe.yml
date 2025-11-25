@@ -12,10 +12,10 @@ image-version: 43 # latest is also supported if you want new updates ASAP
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  #- type: files
-  #  files:
-  #    - source: system
-  #      destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+  - type: files
+    files:
+    - source: system
+      destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: dnf
     repos:
@@ -29,22 +29,26 @@ modules:
 
         - btop
         - neovim
+        - loupe
     remove:
       packages:
+      	# remove fedora stuff
+      	- f43-backgrounds-base
         # example: removing firefox (in favor of the flatpak)
         # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-        - gnome-shell-extension-background-logo
 
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
         scope: system
-        # If no repo information is specified, Flathub will be used by default
-      - scope: user # Also add Flathub user repo, but no user packages
         install:
           - org.mozilla.firefox
+          - org.gnome.loupe
+          - com.github.tchx84.Flatseal
+        # If no repo information is specified, Flathub will be used by default
+      - scope: user # Also add Flathub user repo, but no user packages
 
   - type: os-release
     properties:
@@ -52,7 +56,7 @@ modules:
       ID_LIKE: fedora
       NAME: iuselinuxbtwOS
       PRETTY_NAME: iuselinuxbtwOS Workstation
-      VERSION_ID: "0"
+      VERSION_ID: "1"
       HOME_URL: "https://iulbos.014321.xyz"
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
