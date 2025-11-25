@@ -45,7 +45,7 @@ modules:
         scope: system
         install:
           - org.mozilla.firefox
-          - org.gnome.loupe
+          - org.gnome.Loupe
           - com.github.tchx84.Flatseal
         # If no repo information is specified, Flathub will be used by default
       - scope: user # Also add Flathub user repo, but no user packages
