@@ -21,10 +21,9 @@ modules:
     repos:
       copr:
         - atim/starship
-      - rpmfusion-free
-      - rpmfusion-free-updates
-      - rpmfusion-nonfree
-      - rpmfusion-nonfree-updates
+      files:
+        - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-%OS_VERSION%.noarch.rpm
+        - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-%OS_VERSION%.noarch.rpm
     install:
       packages:
         # add starship/fish/terminal environment
@@ -34,13 +33,6 @@ modules:
         # minimal apps
         - btop
         - neovim
-
-        - libva
-        - libva-utils
-        - mesa-va-drivers
-        - mesa-vapau-drivers
-        - intel-media-driver
-        - ffmpeg-freeworld
 
         # gnome stuff
         - loupe
@@ -67,13 +59,24 @@ modules:
         # If no repo information is specified, Flathub will be used by default
       - scope: user # Also add Flathub user repo, but no user packages
 
+  - type: containerfile
+    snippets:
+        - RUN dnf config-manager setopt fedora-cisco-openh264.enabled=1
+        - RUN dnf swap ffmpeg-free ffmpeg --allowerasing -y
+        - RUN dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
+        - RUN dnf install intel-media-driver -y
+        - RUN dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
+        - RUN dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
+        - RUN dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
+        - RUN dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
+
   - type: os-release
     properties:
       ID: iulbos
       ID_LIKE: fedora
       NAME: iuselinuxbtwOS
       PRETTY_NAME: iuselinuxbtwOS Workstation
-      VERSION_ID: "2"
+      VERSION_ID: "3"
       HOME_URL: "https://iulbos.014321.xyz"
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
