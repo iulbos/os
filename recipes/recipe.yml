@@ -76,7 +76,6 @@ modules:
       ID_LIKE: fedora
       NAME: iuselinuxbtwOS
       PRETTY_NAME: iuselinuxbtwOS Workstation
-      VERSION_ID: "3"
       HOME_URL: "https://iulbos.014321.xyz"
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
