@@ -21,9 +21,7 @@ modules:
     repos:
       copr:
         - atim/starship
-      files:
-        - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-%OS_VERSION%.noarch.rpm
-        - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-%OS_VERSION%.noarch.rpm
+        - v8v88v8v88/helium
     install:
       packages:
         # add starship/fish/terminal environment
@@ -37,6 +35,9 @@ modules:
         # gnome stuff
         - loupe
         - gnome-shell-extension-appindicator
+
+        # helium browser
+        - helium
     remove:
       packages:
         # remove fedora stuff
@@ -52,7 +53,7 @@ modules:
       - notify: true # Send notification after install/uninstall is finished (true/false)
         scope: system
         install:
-#          - org.mozilla.firefox
+          #          - org.mozilla.firefox
           - com.github.tchx84.Flatseal
           - org.freedesktop.Platform.ffmpeg-full
           - com.mattjakeman.ExtensionManager
@@ -61,14 +62,15 @@ modules:
 
   - type: containerfile
     snippets:
-        - RUN dnf config-manager setopt fedora-cisco-openh264.enabled=1
-        - RUN dnf swap ffmpeg-free ffmpeg --allowerasing -y
-        - RUN dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
-        - RUN dnf install intel-media-driver -y
-        - RUN dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
-        - RUN dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
-        - RUN dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
-        - RUN dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
+      - RUN dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+      - RUN dnf config-manager setopt fedora-cisco-openh264.enabled=1
+      - RUN dnf swap ffmpeg-free ffmpeg --allowerasing -y
+      - RUN dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
+      - RUN dnf install intel-media-driver -y
+      - RUN dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
+      - RUN dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
+      - RUN dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
+      - RUN dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
 
   - type: os-release
     properties:
