@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -oue pipefail
+
+echo "⚠️  You're running dnf on iuselinuxbtwOS.
+
+iuselinuxbtwOS is an immutable OS. Instead of dnf:
+  - Use toolbox for development tools:
+      toolbox create
+      toolbox enter
+      sudo dnf install <package>
+
+  - Use rpm-ostree for system-wide packages:
+      rpm-ostree install <package>
+      systemctl reboot
+
+Beware that layering packages will slow down updates and may break your system.
+Only layer packages when absolutely necessary.
+"
