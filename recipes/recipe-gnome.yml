@@ -18,6 +18,9 @@ modules:
       packages:
         - loupe
         - gnome-shell-extension-appindicator
+    remove:
+      packages:
+        - f43-backgrounds-base
 
   - type: gschema-overrides
     include:

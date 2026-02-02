@@ -24,7 +24,6 @@ modules:
     remove:
       packages:
         # remove fedora stuff
-        - f43-backgrounds-base
         - mediawriter
         # example: removing firefox (in favor of the flatpak)
         # "firefox" is the main package, "firefox-langpacks" is a dependency
