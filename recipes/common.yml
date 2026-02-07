@@ -49,8 +49,8 @@ modules:
 
   - type: os-release
     properties:
-      ID: iulbos
-      ID_LIKE: fedora
+      ID: fedora
+      ID_LIKE: iulbos
       NAME: iuselinuxbtwOS
       PRETTY_NAME: iuselinuxbtwOS Workstation
       HOME_URL: "https://iulbos.014321.xyz"
